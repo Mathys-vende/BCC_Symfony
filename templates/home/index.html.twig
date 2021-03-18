@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    {% for cat in categorie %}
+            <h2>{{ cat.nom }}</h2>
+    {% endfor %}
+{% endblock %}
