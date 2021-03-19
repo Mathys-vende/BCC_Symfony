@@ -54,6 +54,10 @@ class Adresse
         $this->users = new ArrayCollection();
         $this->ventes = new ArrayCollection();
     }
+    public function __toString()
+    {
+        return (string)($this->getPays());
+    }
 
     public function getId(): ?int
     {

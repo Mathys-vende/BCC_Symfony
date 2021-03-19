@@ -55,6 +55,11 @@ class Produit
     private $estEnvoyer;
 
     /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $estimation;
+
+    /**
      * @ORM\ManyToOne(targetEntity=Lot::class, inversedBy="produits")
      */
     private $lotProduit;
@@ -246,5 +251,18 @@ class Produit
         $this->stockProduit = $stockProduit;
 
         return $this;
+    }
+
+
+    public function getEstimation(): ?float
+    {
+        return $this->estimation;
+    }
+
+    public function setEstimation(float $estimation){
+        $this->estimation = $estimation;
+
+        return $this;
+
     }
 }

@@ -19,6 +19,7 @@ class ProduitType extends AbstractType
             ->add('referenceCatalogue')
             ->add('description')
             ->add('estEnvoyer')
+            ->add('estimation')
             ->add('lotProduit')
             ->add('UserProduit')
             ->add('enchereGagnante')

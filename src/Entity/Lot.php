@@ -186,4 +186,8 @@ class Lot
 
         return $this;
     }
+    public function __toString()
+    {
+        return (string)($this->getNom());
+    }
 }

@@ -109,8 +109,11 @@ class User implements UserInterface
         $this->paiements = new ArrayCollection();
         $this->produits = new ArrayCollection();
     }
+    public function __toString(){
+        return (string)($this->GetEmail());
+    }
 
-    public function getId(): ?int
+    public function getId(): ?intK
     {
         return $this->id;
     }
