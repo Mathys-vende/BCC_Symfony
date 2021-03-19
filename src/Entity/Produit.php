@@ -83,6 +83,9 @@ class Produit
     {
         $this->categorieProduit = new ArrayCollection();
     }
+    public function __toString(){
+        return (string)($this->GetnomProduit());
+    }
 
     public function getId(): ?int
     {
