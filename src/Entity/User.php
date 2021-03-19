@@ -113,7 +113,7 @@ class User implements UserInterface
         return (string)($this->GetEmail());
     }
 
-    public function getId(): ?intK
+    public function getId(): ?int
     {
         return $this->id;
     }
