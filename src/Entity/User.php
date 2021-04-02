@@ -103,6 +103,11 @@ class User implements UserInterface
      */
     private $produits;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $roles;
+
     public function __construct()
     {
         $this->ordreAchats = new ArrayCollection();
@@ -143,16 +148,16 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function getRoles(): array
+    public function getRoles(): string
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
 
-        return array_unique($roles);
+        // guarantee every user at least has ROLE_USER
+        $roles = 'ROLE_USER';
+
+        return $this->roles;
     }
 
-    public function setRoles(array $roles): self
+    public function setRoles(string $roles): self
     {
         $this->roles = $roles;
 
