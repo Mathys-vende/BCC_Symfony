@@ -12,11 +12,10 @@ class OrdreAchatType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('autobot')
-            ->add('montantMax')
-            ->add('dateCreation')
-            ->add('UserOrdreAchat')
-            ->add('lotOrdreAchat')
+            ->add('offreAcheteur')
+            ->add('idDate')
+            ->add('idVente')
+            ->add('idAcheteur')
         ;
     }
 

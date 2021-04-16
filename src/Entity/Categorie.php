@@ -20,18 +20,27 @@ class Categorie
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $nom;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Produit::class, mappedBy="categorieProduit")
+     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="idlot")
      */
-    private $produits;
+    private $idCategorie;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Lot::class, inversedBy="categories")
+     */
+    private $idlot;
+
+    public function __toString() {
+        return $this->nom;
+    }
 
     public function __construct()
     {
-        $this->produits = new ArrayCollection();
+        $this->idlot = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -51,36 +60,39 @@ class Categorie
         return $this;
     }
 
+    public function getIdCategorie(): ?categorie
+    {
+        return $this->idCategorie;
+    }
+
+    public function setIdCategorie(?categorie $idCategorie): self
+    {
+        $this->idCategorie = $idCategorie;
+
+        return $this;
+    }
+
     /**
-     * @return Collection|Produit[]
+     * @return Collection|lot[]
      */
-    public function getProduits(): Collection
+    public function getIdlot(): Collection
     {
-        return $this->produits;
+        return $this->idlot;
     }
 
-    public function addProduit(Produit $produit): self
+    public function addIdlot(lot $idlot): self
     {
-        if (!$this->produits->contains($produit)) {
-            $this->produits[] = $produit;
-            $produit->addCategorieProduit($this);
+        if (!$this->idlot->contains($idlot)) {
+            $this->idlot[] = $idlot;
         }
 
         return $this;
     }
 
-    public function removeProduit(Produit $produit): self
+    public function removeIdlot(lot $idlot): self
     {
-        if ($this->produits->removeElement($produit)) {
-            $produit->removeCategorieProduit($this);
-        }
+        $this->idlot->removeElement($idlot);
 
         return $this;
     }
-    public function __toString()
-    {
-        return (string)($this->getNom());
-    }
-
-
 }

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New VenteEnchere{% endblock %}
+
+{% block body %}
+    <h1>Create new VenteEnchere</h1>
+
+    {{ include('vente_enchere/_form.html.twig') }}
+
+    <a href="{{ path('vente_enchere_index') }}">back to list</a>
+{% endblock %}

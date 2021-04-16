@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SalleDeVente index{% endblock %}
+
+{% block body %}
+    <h1>SalleDeVente index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for salle_de_vente in salle_de_ventes %}
+            <tr>
+                <td>{{ salle_de_vente.id }}</td>
+                <td>{{ salle_de_vente.nom }}</td>
+                <td>
+                    <a href="{{ path('salle_de_vente_show', {'id': salle_de_vente.id}) }}">show</a>
+                    <a href="{{ path('salle_de_vente_edit', {'id': salle_de_vente.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('salle_de_vente_new') }}">Create new</a>
+{% endblock %}

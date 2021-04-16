@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit SalleDeVente{% endblock %}
+
+{% block body %}
+    <h1>Edit SalleDeVente</h1>
+
+    {{ include('salle_de_vente/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('salle_de_vente_index') }}">back to list</a>
+
+    {{ include('salle_de_vente/_delete_form.html.twig') }}
+{% endblock %}

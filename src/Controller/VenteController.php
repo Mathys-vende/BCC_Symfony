@@ -79,7 +79,7 @@ class VenteController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="vente_delete", methods={"DELETE"})
+     * @Route("/{id}", name="vente_delete", methods={"POST"})
      */
     public function delete(Request $request, Vente $vente): Response
     {

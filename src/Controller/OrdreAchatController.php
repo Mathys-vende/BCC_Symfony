@@ -79,7 +79,7 @@ class OrdreAchatController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="ordre_achat_delete", methods={"DELETE"})
+     * @Route("/{id}", name="ordre_achat_delete", methods={"POST"})
      */
     public function delete(Request $request, OrdreAchat $ordreAchat): Response
     {

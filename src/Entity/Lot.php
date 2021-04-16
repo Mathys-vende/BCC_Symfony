@@ -20,40 +20,75 @@ class Lot
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity=OrdreAchat::class, mappedBy="lotOrdreAchat")
+     * @ORM\Column(type="float")
      */
-    private $ordreAchats;
+    private $prixDeDepart;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Paiement::class, inversedBy="lotPaiement")
+     * @ORM\OneToOne(targetEntity=Personne::class, cascade={"persist", "remove"})
      */
-    private $paiement;
+    private $idVendeur;
 
     /**
-     * @ORM\OneToMany(targetEntity=Produit::class, mappedBy="lotProduit")
+     * @ORM\OneToOne(targetEntity=Personne::class, cascade={"persist", "remove"})
      */
-    private $produits;
+    private $idAcheteur;
 
     /**
-     * @ORM\OneToMany(targetEntity=Vente::class, mappedBy="lotVente")
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $prixDeVente;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $prixDeReserve;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $statut;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Vente::class, mappedBy="idLot")
      */
     private $ventes;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Categorie::class, mappedBy="idlot")
+     */
+    private $categories;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Estimation::class, mappedBy="idLot")
+     */
+    private $estimations;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Produit::class, mappedBy="idLot")
+     */
+    private $produits;
+
+    public function __toString() {
+        return $this->ventes;
+    }
+
     public function __construct()
     {
-        $this->ordreAchats = new ArrayCollection();
-        $this->produits = new ArrayCollection();
         $this->ventes = new ArrayCollection();
+        $this->categories = new ArrayCollection();
+        $this->estimations = new ArrayCollection();
+        $this->produits = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -85,74 +120,74 @@ class Lot
         return $this;
     }
 
-    /**
-     * @return Collection|OrdreAchat[]
-     */
-    public function getOrdreAchats(): Collection
+    public function getPrixDeDepart(): ?float
     {
-        return $this->ordreAchats;
+        return $this->prixDeDepart;
     }
 
-    public function addOrdreAchat(OrdreAchat $ordreAchat): self
+    public function setPrixDeDepart(float $prixDeDepart): self
     {
-        if (!$this->ordreAchats->contains($ordreAchat)) {
-            $this->ordreAchats[] = $ordreAchat;
-            $ordreAchat->setLotOrdreAchat($this);
-        }
+        $this->prixDeDepart = $prixDeDepart;
 
         return $this;
     }
 
-    public function removeOrdreAchat(OrdreAchat $ordreAchat): self
+    public function getIdVendeur(): ?personne
     {
-        if ($this->ordreAchats->removeElement($ordreAchat)) {
-            // set the owning side to null (unless already changed)
-            if ($ordreAchat->getLotOrdreAchat() === $this) {
-                $ordreAchat->setLotOrdreAchat(null);
-            }
-        }
+        return $this->idVendeur;
+    }
+
+    public function setIdVendeur(?personne $idVendeur): self
+    {
+        $this->idVendeur = $idVendeur;
 
         return $this;
     }
 
-    public function getPaiement(): ?Paiement
+    public function getIdAcheteur(): ?personne
     {
-        return $this->paiement;
+        return $this->idAcheteur;
     }
 
-    public function setPaiement(?Paiement $paiement): self
+    public function setIdAcheteur(?personne $idAcheteur): self
     {
-        $this->paiement = $paiement;
+        $this->idAcheteur = $idAcheteur;
 
         return $this;
     }
 
-    /**
-     * @return Collection|Produit[]
-     */
-    public function getProduits(): Collection
+    public function getPrixDeVente(): ?float
     {
-        return $this->produits;
+        return $this->prixDeVente;
     }
 
-    public function addProduit(Produit $produit): self
+    public function setPrixDeVente(?float $prixDeVente): self
     {
-        if (!$this->produits->contains($produit)) {
-            $this->produits[] = $produit;
-            $produit->setLotProduit($this);
-        }
+        $this->prixDeVente = $prixDeVente;
 
         return $this;
     }
 
-    public function removeProduit(Produit $produit): self
+    public function getPrixDeReserve(): ?float
     {
-        if ($this->produits->removeElement($produit)) {
-            // set the owning side to null (unless already changed)
-            if ($produit->getLotProduit() === $this) {
-                $produit->setLotProduit(null);
-            }
-        }
+        return $this->prixDeReserve;
+    }
+
+    public function setPrixDeReserve(?float $prixDeReserve): self
+    {
+        $this->prixDeReserve = $prixDeReserve;
+
+        return $this;
+    }
+
+    public function getStatut(): ?string
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(string $statut): self
+    {
+        $this->statut = $statut;
 
         return $this;
     }
@@ -169,7 +204,7 @@ class Lot
     {
         if (!$this->ventes->contains($vente)) {
             $this->ventes[] = $vente;
-            $vente->setLotVente($this);
+            $vente->setIdLot($this);
         }
 
         return $this;
@@ -179,15 +214,98 @@ class Lot
     {
         if ($this->ventes->removeElement($vente)) {
             // set the owning side to null (unless already changed)
-            if ($vente->getLotVente() === $this) {
-                $vente->setLotVente(null);
+            if ($vente->getIdLot() === $this) {
+                $vente->setIdLot(null);
             }
         }
 
         return $this;
     }
-    public function __toString()
+
+    /**
+     * @return Collection|Categorie[]
+     */
+    public function getCategories(): Collection
     {
-        return (string)($this->getNom());
+        return $this->categories;
+    }
+
+    public function addCategory(Categorie $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+            $category->addIdlot($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Categorie $category): self
+    {
+        if ($this->categories->removeElement($category)) {
+            $category->removeIdlot($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Estimation[]
+     */
+    public function getEstimations(): Collection
+    {
+        return $this->estimations;
+    }
+
+    public function addEstimation(Estimation $estimation): self
+    {
+        if (!$this->estimations->contains($estimation)) {
+            $this->estimations[] = $estimation;
+            $estimation->setIdLot($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEstimation(Estimation $estimation): self
+    {
+        if ($this->estimations->removeElement($estimation)) {
+            // set the owning side to null (unless already changed)
+            if ($estimation->getIdLot() === $this) {
+                $estimation->setIdLot(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Produit[]
+     */
+    public function getProduits(): Collection
+    {
+        return $this->produits;
+    }
+
+    public function addProduit(Produit $produit): self
+    {
+        if (!$this->produits->contains($produit)) {
+            $this->produits[] = $produit;
+            $produit->setIdLot($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduit(Produit $produit): self
+    {
+        if ($this->produits->removeElement($produit)) {
+            // set the owning side to null (unless already changed)
+            if ($produit->getIdLot() === $this) {
+                $produit->setIdLot(null);
+            }
+        }
+
+        return $this;
     }
 }

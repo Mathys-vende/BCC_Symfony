@@ -9,14 +9,8 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>NomArtiste</th>
-                <th>NomStyle</th>
-                <th>NomProduit</th>
-                <th>PrixReserve</th>
-                <th>Estimation</th>
-                <th>ReferenceCatalogue</th>
+                <th>Nom</th>
                 <th>Description</th>
-                <th>EstEnvoyer</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -24,14 +18,8 @@
         {% for produit in produits %}
             <tr>
                 <td>{{ produit.id }}</td>
-                <td>{{ produit.nomArtiste }}</td>
-                <td>{{ produit.nomStyle }}</td>
-                <td>{{ produit.nomProduit }}</td>
-                <td>{{ produit.prixReserve }}</td>
-                <td>{{ produit.estimation }}</td>
-                <td>{{ produit.referenceCatalogue }}</td>
+                <td>{{ produit.nom }}</td>
                 <td>{{ produit.description }}</td>
-                <td>{{ produit.estEnvoyer ? 'Yes' : 'No' }}</td>
                 <td>
                     <a href="{{ path('produit_show', {'id': produit.id}) }}">show</a>
                     <a href="{{ path('produit_edit', {'id': produit.id}) }}">edit</a>
@@ -39,7 +27,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="9">no records found</td>
+                <td colspan="4">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

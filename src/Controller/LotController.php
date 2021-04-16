@@ -79,7 +79,7 @@ class LotController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="lot_delete", methods={"DELETE"})
+     * @Route("/{id}", name="lot_delete", methods={"POST"})
      */
     public function delete(Request $request, Lot $lot): Response
     {

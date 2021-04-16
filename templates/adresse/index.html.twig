@@ -9,10 +9,12 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Pays</th>
-                <th>Ville</th>
+                <th>Region</th>
+                <th>Departement</th>
+                <th>Adresse</th>
                 <th>CodePostal</th>
-                <th>Rue</th>
+                <th>Ville</th>
+                <th>Pays</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -20,10 +22,12 @@
         {% for adresse in adresses %}
             <tr>
                 <td>{{ adresse.id }}</td>
-                <td>{{ adresse.pays }}</td>
-                <td>{{ adresse.ville }}</td>
+                <td>{{ adresse.region }}</td>
+                <td>{{ adresse.departement }}</td>
+                <td>{{ adresse.adresse }}</td>
                 <td>{{ adresse.codePostal }}</td>
-                <td>{{ adresse.rue }}</td>
+                <td>{{ adresse.ville }}</td>
+                <td>{{ adresse.pays }}</td>
                 <td>
                     <a href="{{ path('adresse_show', {'id': adresse.id}) }}">show</a>
                     <a href="{{ path('adresse_edit', {'id': adresse.id}) }}">edit</a>
@@ -31,7 +35,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="8">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

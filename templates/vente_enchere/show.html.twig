@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}VenteEnchere{% endblock %}
+
+{% block body %}
+    <h1>VenteEnchere</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ vente_enchere.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ vente_enchere.nom }}</td>
+            </tr>
+            <tr>
+                <th>HeureDebut</th>
+                <td>{{ vente_enchere.heureDebut ? vente_enchere.heureDebut|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>HeureFin</th>
+                <td>{{ vente_enchere.heureFin ? vente_enchere.heureFin|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ vente_enchere.type }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('vente_enchere_index') }}">back to list</a>
+
+    <a href="{{ path('vente_enchere_edit', {'id': vente_enchere.id}) }}">edit</a>
+
+    {{ include('vente_enchere/_delete_form.html.twig') }}
+{% endblock %}

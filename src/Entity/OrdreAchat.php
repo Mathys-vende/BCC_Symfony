@@ -18,91 +18,78 @@ class OrdreAchat
     private $id;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="float")
      */
-    private $autobot;
+    private $offreAcheteur;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\OneToOne(targetEntity=Date::class, cascade={"persist", "remove"})
      */
-    private $montantMax;
+    private $idDate;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\ManyToOne(targetEntity=Vente::class, inversedBy="ordreAchats")
      */
-    private $dateCreation;
+    private $idVente;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="ordreAchats")
+     * @ORM\ManyToOne(targetEntity=Personne::class, inversedBy="ordreAchats")
      */
-    private $UserOrdreAchat;
+    private $idAcheteur;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Lot::class, inversedBy="ordreAchats")
-     */
-    private $lotOrdreAchat;
+    public function __toString() {
+        return $this->offreAcheteur;
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getAutobot(): ?bool
+    public function getOffreAcheteur(): ?float
     {
-        return $this->autobot;
+        return $this->offreAcheteur;
     }
 
-    public function setAutobot(bool $autobot): self
+    public function setOffreAcheteur(float $offreAcheteur): self
     {
-        $this->autobot = $autobot;
+        $this->offreAcheteur = $offreAcheteur;
 
         return $this;
     }
 
-    public function getMontantMax(): ?float
+    public function getIdDate(): ?date
     {
-        return $this->montantMax;
+        return $this->idDate;
     }
 
-    public function setMontantMax(float $montantMax): self
+    public function setIdDate(?date $idDate): self
     {
-        $this->montantMax = $montantMax;
+        $this->idDate = $idDate;
 
         return $this;
     }
 
-    public function getDateCreation(): ?\DateTimeInterface
+    public function getIdVente(): ?vente
     {
-        return $this->dateCreation;
+        return $this->idVente;
     }
 
-    public function setDateCreation(\DateTimeInterface $dateCreation): self
+    public function setIdVente(?vente $idVente): self
     {
-        $this->dateCreation = $dateCreation;
+        $this->idVente = $idVente;
 
         return $this;
     }
 
-    public function getUserOrdreAchat(): ?User
+    public function getIdAcheteur(): ?personne
     {
-        return $this->UserOrdreAchat;
+        return $this->idAcheteur;
     }
 
-    public function setUserOrdreAchat(?User $UserOrdreAchat): self
+    public function setIdAcheteur(?personne $idAcheteur): self
     {
-        $this->UserOrdreAchat = $UserOrdreAchat;
-
-        return $this;
-    }
-
-    public function getLotOrdreAchat(): ?Lot
-    {
-        return $this->lotOrdreAchat;
-    }
-
-    public function setLotOrdreAchat(?Lot $lotOrdreAchat): self
-    {
-        $this->lotOrdreAchat = $lotOrdreAchat;
+        $this->idAcheteur = $idAcheteur;
 
         return $this;
     }

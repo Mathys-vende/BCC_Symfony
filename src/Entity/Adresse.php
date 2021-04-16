@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\AdresseRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,43 +18,42 @@ class Adresse
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $pays;
+    private $region;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $ville;
+    private $departement;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
+     */
+    private $adresse;
+
+    /**
+     * @ORM\Column(type="string", length=255)
      */
     private $codePostal;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $rue;
+    private $ville;
 
     /**
-     * @ORM\OneToMany(targetEntity=User::class, mappedBy="adresse")
+     * @ORM\Column(type="string", length=255)
      */
-    private $users;
+    private $pays;
 
     /**
-     * @ORM\OneToMany(targetEntity=Vente::class, mappedBy="adresseVente")
+     * @ORM\ManyToOne(targetEntity=Personne::class, inversedBy="idAdresse")
      */
-    private $ventes;
+    private $personne;
 
-    public function __construct()
-    {
-        $this->users = new ArrayCollection();
-        $this->ventes = new ArrayCollection();
-    }
-    public function __toString()
-    {
-        return (string)($this->getPays());
+    public function __toString() {
+        return $this->adresse;
     }
 
     public function getId(): ?int
@@ -64,26 +61,38 @@ class Adresse
         return $this->id;
     }
 
-    public function getPays(): ?string
+    public function getRegion(): ?string
     {
-        return $this->pays;
+        return $this->region;
     }
 
-    public function setPays(string $pays): self
+    public function setRegion(string $region): self
     {
-        $this->pays = $pays;
+        $this->region = $region;
 
         return $this;
     }
 
-    public function getVille(): ?string
+    public function getDepartement(): ?string
     {
-        return $this->ville;
+        return $this->departement;
     }
 
-    public function setVille(string $ville): self
+    public function setDepartement(string $departement): self
     {
-        $this->ville = $ville;
+        $this->departement = $departement;
+
+        return $this;
+    }
+
+    public function getAdresse(): ?string
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(string $adresse): self
+    {
+        $this->adresse = $adresse;
 
         return $this;
     }
@@ -100,74 +109,38 @@ class Adresse
         return $this;
     }
 
-    public function getRue(): ?string
+    public function getVille(): ?string
     {
-        return $this->rue;
+        return $this->ville;
     }
 
-    public function setRue(string $rue): self
+    public function setVille(string $ville): self
     {
-        $this->rue = $rue;
+        $this->ville = $ville;
 
         return $this;
     }
 
-    /**
-     * @return Collection|User[]
-     */
-    public function getUsers(): Collection
+    public function getPays(): ?string
     {
-        return $this->Users;
+        return $this->pays;
     }
 
-    public function addUser(User $User): self
+    public function setPays(string $pays): self
     {
-        if (!$this->Users->contains($User)) {
-            $this->Users[] = $User;
-            $User->setAdresse($this);
-        }
+        $this->pays = $pays;
 
         return $this;
     }
 
-    public function removeUser(User $User): self
+    public function getPersonne(): ?Personne
     {
-        if ($this->Users->removeElement($User)) {
-            // set the owning side to null (unless already changed)
-            if ($User->getAdresse() === $this) {
-                $User->setAdresse(null);
-            }
-        }
-
-        return $this;
+        return $this->personne;
     }
 
-    /**
-     * @return Collection|Vente[]
-     */
-    public function getVentes(): Collection
+    public function setPersonne(?Personne $personne): self
     {
-        return $this->ventes;
-    }
-
-    public function addVente(Vente $vente): self
-    {
-        if (!$this->ventes->contains($vente)) {
-            $this->ventes[] = $vente;
-            $vente->setAdresseVente($this);
-        }
-
-        return $this;
-    }
-
-    public function removeVente(Vente $vente): self
-    {
-        if ($this->ventes->removeElement($vente)) {
-            // set the owning side to null (unless already changed)
-            if ($vente->getAdresseVente() === $this) {
-                $vente->setAdresseVente(null);
-            }
-        }
+        $this->personne = $personne;
 
         return $this;
     }
