@@ -65,8 +65,9 @@ class Personne implements UserInterface
      */
     private $encherirs;
 
-    public function __toString() {
-        return $this->nom;
+    public function __toString(): ?string
+    {
+        return $this->email;
     }
 
     public function __construct()
@@ -75,6 +76,7 @@ class Personne implements UserInterface
         $this->ordreAchats = new ArrayCollection();
         $this->encherirs = new ArrayCollection();
     }
+
 
 
     public function getId(): ?int
