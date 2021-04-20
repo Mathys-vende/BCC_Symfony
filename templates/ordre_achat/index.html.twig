@@ -9,9 +9,7 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Autobot</th>
-                <th>MontantMax</th>
-                <th>DateCreation</th>
+                <th>OffreAcheteur</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -19,9 +17,7 @@
         {% for ordre_achat in ordre_achats %}
             <tr>
                 <td>{{ ordre_achat.id }}</td>
-                <td>{{ ordre_achat.autobot ? 'Yes' : 'No' }}</td>
-                <td>{{ ordre_achat.montantMax }}</td>
-                <td>{{ ordre_achat.dateCreation ? ordre_achat.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ ordre_achat.offreAcheteur }}</td>
                 <td>
                     <a href="{{ path('ordre_achat_show', {'id': ordre_achat.id}) }}">show</a>
                     <a href="{{ path('ordre_achat_edit', {'id': ordre_achat.id}) }}">edit</a>
@@ -29,7 +25,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="3">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

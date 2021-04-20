@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\VenteRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -18,73 +20,154 @@ class Vente
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\OneToOne(targetEntity=Date::class, cascade={"persist", "remove"})
      */
-    private $nom;
+    private $idDate;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\ManyToOne(targetEntity=VenteEnchere::class, inversedBy="commission")
      */
-    private $dateDebut;
+    private $idVenteEnchere;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Adresse::class, inversedBy="ventes")
+     * @ORM\Column(type="float")
      */
-    private $adresseVente;
+    private $commission;
 
     /**
      * @ORM\ManyToOne(targetEntity=Lot::class, inversedBy="ventes")
      */
-    private $lotVente;
+    private $idLot;
+
+    /**
+     * @ORM\OneToMany(targetEntity=OrdreAchat::class, mappedBy="idVente")
+     */
+    private $ordreAchats;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Encherir::class, mappedBy="idVente")
+     */
+    private $encherirs;
+
+    public function __toString() {
+        return $this->ordreAchats;
+    }
+
+    public function __construct()
+    {
+        $this->ordreAchats = new ArrayCollection();
+        $this->encherirs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
-    public function getNom(): ?string
+
+    public function getIdDate(): ?date
     {
-        return $this->nom;
+        return $this->idDate;
     }
 
-    public function setNom(string $nom): self
+    public function setIdDate(?date $idDate): self
     {
-        $this->nom = $nom;
+        $this->idDate = $idDate;
 
         return $this;
     }
 
-    public function getDateDebut(): ?\DateTimeInterface
+    public function getIdVenteEnchere(): ?venteEnchere
     {
-        return $this->dateDebut;
+        return $this->idVenteEnchere;
     }
 
-    public function setDateDebut(\DateTimeInterface $dateDebut): self
+    public function setIdVenteEnchere(?venteEnchere $idVenteEnchere): self
     {
-        $this->dateDebut = $dateDebut;
+        $this->idVenteEnchere = $idVenteEnchere;
 
         return $this;
     }
 
-    public function getAdresseVente(): ?Adresse
+    public function getCommission(): ?float
     {
-        return $this->adresseVente;
+        return $this->commission;
     }
 
-    public function setAdresseVente(?Adresse $adresseVente): self
+    public function setCommission(float $commission): self
     {
-        $this->adresseVente = $adresseVente;
+        $this->commission = $commission;
 
         return $this;
     }
 
-    public function getLotVente(): ?Lot
+    public function getIdLot(): ?lot
     {
-        return $this->lotVente;
+        return $this->idLot;
     }
 
-    public function setLotVente(?Lot $lotVente): self
+    public function setIdLot(?lot $idLot): self
     {
-        $this->lotVente = $lotVente;
+        $this->idLot = $idLot;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|OrdreAchat[]
+     */
+    public function getOrdreAchats(): Collection
+    {
+        return $this->ordreAchats;
+    }
+
+    public function addOrdreAchat(OrdreAchat $ordreAchat): self
+    {
+        if (!$this->ordreAchats->contains($ordreAchat)) {
+            $this->ordreAchats[] = $ordreAchat;
+            $ordreAchat->setIdVente($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrdreAchat(OrdreAchat $ordreAchat): self
+    {
+        if ($this->ordreAchats->removeElement($ordreAchat)) {
+            // set the owning side to null (unless already changed)
+            if ($ordreAchat->getIdVente() === $this) {
+                $ordreAchat->setIdVente(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Encherir[]
+     */
+    public function getEncherirs(): Collection
+    {
+        return $this->encherirs;
+    }
+
+    public function addEncherir(Encherir $encherir): self
+    {
+        if (!$this->encherirs->contains($encherir)) {
+            $this->encherirs[] = $encherir;
+            $encherir->setIdVente($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEncherir(Encherir $encherir): self
+    {
+        if ($this->encherirs->removeElement($encherir)) {
+            // set the owning side to null (unless already changed)
+            if ($encherir->getIdVente() === $this) {
+                $encherir->setIdVente(null);
+            }
+        }
 
         return $this;
     }

@@ -13,7 +13,8 @@ class CategorieType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('produits')
+            ->add('idCategorie')
+            ->add('idlot')
         ;
     }
 

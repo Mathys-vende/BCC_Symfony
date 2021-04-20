@@ -79,7 +79,7 @@ class AdresseController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="adresse_delete", methods={"DELETE"})
+     * @Route("/{id}", name="adresse_delete", methods={"POST"})
      */
     public function delete(Request $request, Adresse $adresse): Response
     {

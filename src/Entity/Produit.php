@@ -20,76 +20,38 @@ class Produit
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $nomArtiste;
+    private $nom;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $nomStyle;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $nomProduit;
-
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     */
-    private $prixReserve;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $referenceCatalogue;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text")
      */
     private $description;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="produits")
      */
-    private $estEnvoyer;
+    private $idTag;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\OneToMany(targetEntity=Photo::class, mappedBy="idProduit")
      */
-    private $estimation;
+    private $photos;
 
     /**
      * @ORM\ManyToOne(targetEntity=Lot::class, inversedBy="produits")
      */
-    private $lotProduit;
+    private $idLot;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="produits")
-     */
-    private $UserProduit;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Enchere::class, cascade={"persist", "remove"})
-     */
-    private $enchereGagnante;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Categorie::class, inversedBy="produits")
-     */
-    private $categorieProduit;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="produits")
-     */
-    private $stockProduit;
+    public function __toString() {
+        return $this->nom;
+    }
 
     public function __construct()
     {
-        $this->categorieProduit = new ArrayCollection();
-    }
-    public function __toString(){
-        return (string)($this->GetnomProduit());
+        $this->idTag = new ArrayCollection();
+        $this->photos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -97,62 +59,14 @@ class Produit
         return $this->id;
     }
 
-    public function getNomArtiste(): ?string
+    public function getNom(): ?string
     {
-        return $this->nomArtiste;
+        return $this->nom;
     }
 
-    public function setNomArtiste(string $nomArtiste): self
+    public function setNom(string $nom): self
     {
-        $this->nomArtiste = $nomArtiste;
-
-        return $this;
-    }
-
-    public function getNomStyle(): ?string
-    {
-        return $this->nomStyle;
-    }
-
-    public function setNomStyle(string $nomStyle): self
-    {
-        $this->nomStyle = $nomStyle;
-
-        return $this;
-    }
-
-    public function getNomProduit(): ?string
-    {
-        return $this->nomProduit;
-    }
-
-    public function setNomProduit(string $nomProduit): self
-    {
-        $this->nomProduit = $nomProduit;
-
-        return $this;
-    }
-
-    public function getPrixReserve(): ?float
-    {
-        return $this->prixReserve;
-    }
-
-    public function setPrixReserve(float $prixReserve): self
-    {
-        $this->prixReserve = $prixReserve;
-
-        return $this;
-    }
-
-    public function getReferenceCatalogue(): ?string
-    {
-        return $this->referenceCatalogue;
-    }
-
-    public function setReferenceCatalogue(string $referenceCatalogue): self
-    {
-        $this->referenceCatalogue = $referenceCatalogue;
+        $this->nom = $nom;
 
         return $this;
     }
@@ -169,100 +83,69 @@ class Produit
         return $this;
     }
 
-    public function getEstEnvoyer(): ?bool
-    {
-        return $this->estEnvoyer;
-    }
-
-    public function setEstEnvoyer(bool $estEnvoyer): self
-    {
-        $this->estEnvoyer = $estEnvoyer;
-
-        return $this;
-    }
-
-    public function getLotProduit(): ?Lot
-    {
-        return $this->lotProduit;
-    }
-
-    public function setLotProduit(?Lot $lotProduit): self
-    {
-        $this->lotProduit = $lotProduit;
-
-        return $this;
-    }
-
-    public function getUserProduit(): ?User
-    {
-        return $this->UserProduit;
-    }
-
-    public function setUserProduit(?User $UserProduit): self
-    {
-        $this->UserProduit = $UserProduit;
-
-        return $this;
-    }
-
-    public function getEnchereGagnante(): ?Enchere
-    {
-        return $this->enchereGagnante;
-    }
-
-    public function setEnchereGagnante(?Enchere $enchereGagnante): self
-    {
-        $this->enchereGagnante = $enchereGagnante;
-
-        return $this;
-    }
-
     /**
-     * @return Collection|Categorie[]
+     * @return Collection|tag[]
      */
-    public function getCategorieProduit(): Collection
+    public function getIdTag(): Collection
     {
-        return $this->categorieProduit;
+        return $this->idTag;
     }
 
-    public function addCategorieProduit(Categorie $categorieProduit): self
+    public function addIdTag(tag $idTag): self
     {
-        if (!$this->categorieProduit->contains($categorieProduit)) {
-            $this->categorieProduit[] = $categorieProduit;
+        if (!$this->idTag->contains($idTag)) {
+            $this->idTag[] = $idTag;
         }
 
         return $this;
     }
 
-    public function removeCategorieProduit(Categorie $categorieProduit): self
+    public function removeIdTag(tag $idTag): self
     {
-        $this->categorieProduit->removeElement($categorieProduit);
+        $this->idTag->removeElement($idTag);
 
         return $this;
     }
 
-    public function getStockProduit(): ?User
+    /**
+     * @return Collection|Photo[]
+     */
+    public function getPhotos(): Collection
     {
-        return $this->stockProduit;
+        return $this->photos;
     }
 
-    public function setStockProduit(?User $stockProduit): self
+    public function addPhoto(Photo $photo): self
     {
-        $this->stockProduit = $stockProduit;
+        if (!$this->photos->contains($photo)) {
+            $this->photos[] = $photo;
+            $photo->setIdProduit($this);
+        }
 
         return $this;
     }
 
-
-    public function getEstimation(): ?float
+    public function removePhoto(Photo $photo): self
     {
-        return $this->estimation;
-    }
-
-    public function setEstimation(float $estimation){
-        $this->estimation = $estimation;
+        if ($this->photos->removeElement($photo)) {
+            // set the owning side to null (unless already changed)
+            if ($photo->getIdProduit() === $this) {
+                $photo->setIdProduit(null);
+            }
+        }
 
         return $this;
+    }
 
+    public function getIdLot(): ?lot
+    {
+        return $this->idLot;
+    }
+
+    public function setIdLot(?lot $idLot): self
+    {
+        $this->idLot = $idLot;
+
+        return $this;
     }
 }

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New CommissairePriseur{% endblock %}
+
+{% block body %}
+    <h1>Create new CommissairePriseur</h1>
+
+    {{ include('commissaire_priseur/_form.html.twig') }}
+
+    <a href="{{ path('commissaire_priseur_index') }}">back to list</a>
+{% endblock %}

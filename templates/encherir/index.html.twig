@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Encherir index{% endblock %}
+
+{% block body %}
+    <h1>Encherir index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>PrixPropose</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for encherir in encherirs %}
+            <tr>
+                <td>{{ encherir.id }}</td>
+                <td>{{ encherir.prixPropose }}</td>
+                <td>
+                    <a href="{{ path('encherir_show', {'id': encherir.id}) }}">show</a>
+                    <a href="{{ path('encherir_edit', {'id': encherir.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('encherir_new') }}">Create new</a>
+{% endblock %}

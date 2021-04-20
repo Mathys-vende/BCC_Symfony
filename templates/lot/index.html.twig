@@ -11,6 +11,10 @@
                 <th>Id</th>
                 <th>Nom</th>
                 <th>Description</th>
+                <th>PrixDeDepart</th>
+                <th>PrixDeVente</th>
+                <th>PrixDeReserve</th>
+                <th>Statut</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -20,6 +24,10 @@
                 <td>{{ lot.id }}</td>
                 <td>{{ lot.nom }}</td>
                 <td>{{ lot.description }}</td>
+                <td>{{ lot.prixDeDepart }}</td>
+                <td>{{ lot.prixDeVente }}</td>
+                <td>{{ lot.prixDeReserve }}</td>
+                <td>{{ lot.statut }}</td>
                 <td>
                     <a href="{{ path('lot_show', {'id': lot.id}) }}">show</a>
                     <a href="{{ path('lot_edit', {'id': lot.id}) }}">edit</a>
@@ -27,7 +35,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="8">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

@@ -5,43 +5,19 @@
 {% block body %}
     <h1>Produit</h1>
 
-    <table class="w-full">
+    <table class="table">
         <tbody>
             <tr>
-                <th class="border-2 border-grey-300 pt-2 pb-2" >Id</th>
-                <td class="border-2 border-grey-300 pt-2 pb-2">{{ produit.id }}</td>
+                <th>Id</th>
+                <td>{{ produit.id }}</td>
             </tr>
             <tr>
-                <th>NomArtiste</th>
-                <td>{{ produit.nomArtiste }}</td>
-            </tr>
-            <tr>
-                <th>NomStyle</th>
-                <td>{{ produit.nomStyle }}</td>
-            </tr>
-            <tr>
-                <th>NomProduit</th>
-                <td>{{ produit.nomProduit }}</td>
-            </tr>
-            <tr>
-                <th>PrixReserve</th>
-                <td>{{ produit.prixReserve }}</td>
-            </tr>
-            <tr>
-                <th>Estimation</th>
-                <td>{{ produit.estimation }}</td>
-            </tr>
-            <tr>
-                <th>ReferenceCatalogue</th>
-                <td>{{ produit.referenceCatalogue }}</td>
+                <th>Nom</th>
+                <td>{{ produit.nom }}</td>
             </tr>
             <tr>
                 <th>Description</th>
                 <td>{{ produit.description }}</td>
-            </tr>
-            <tr>
-                <th>EstEnvoyer</th>
-                <td>{{ produit.estEnvoyer ? 'Yes' : 'No' }}</td>
             </tr>
         </tbody>
     </table>
