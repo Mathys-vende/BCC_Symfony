@@ -35,7 +35,7 @@ class CommissairePriseur
     private $estimations;
 
     public function __toString() {
-        return $this->id;
+        return (string)$this->idPersonne;
     }
 
     public function __construct()

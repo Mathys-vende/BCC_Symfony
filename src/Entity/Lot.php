@@ -80,7 +80,7 @@ class Lot
     private $produits;
 
     public function __toString() {
-        return $this->ventes;
+        return $this->nom;
     }
 
     public function __construct()

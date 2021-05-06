@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Date;
-use App\Form\DateType;
+use App\Form\DateTimeType;
 use App\Repository\DateRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +31,7 @@ class DateController extends AbstractController
     public function new(Request $request): Response
     {
         $date = new Date();
-        $form = $this->createForm(DateType::class, $date);
+        $form = $this->createForm(DateTimeType::class, $date);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,7 +63,7 @@ class DateController extends AbstractController
      */
     public function edit(Request $request, Date $date): Response
     {
-        $form = $this->createForm(DateType::class, $date);
+        $form = $this->createForm(DatetimeType::class, $date);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

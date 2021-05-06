@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {% endblock %}
+
+{% block body %}
+
+    <h1>Liste des prochaines ventes aux enchères</h1>
+    <table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Nom</th>
+        <th>HeureDebut</th>
+        <th>HeureFin</th>
+        <th>Type</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for vente_enchere in ve %}
+    <tr>
+        <td>{{ vente_enchere.id }}</td>
+        <td>{{ vente_enchere.nom }}</td>
+        <td>{{ vente_enchere.heureDebut ? vente_enchere.heureDebut|date('H:i:s') : '' }}</td>
+        <td>{{ vente_enchere.heureFin ? vente_enchere.heureFin|date('H:i:s') : '' }}</td>
+        <td>{{ vente_enchere.type }}</td>
+
+    </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+
+{% endblock %}
