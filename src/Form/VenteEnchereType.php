@@ -2,8 +2,13 @@
 
 namespace App\Form;
 
+use App\Entity\Date;
 use App\Entity\VenteEnchere;
+use Doctrine\DBAL\Types\DateType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,10 +21,11 @@ class VenteEnchereType extends AbstractType
             ->add('heureDebut')
             ->add('heureFin')
             ->add('type')
-            ->add('idDate')
+            ->add('Date', DateTimeType::class,[
+                'date_label'=>'Starts On',
+            ])
             ->add('idSalleDeVente')
-            ->add('idDevise')
-        ;
+            ->add('idDevise');
     }
 
     public function configureOptions(OptionsResolver $resolver)

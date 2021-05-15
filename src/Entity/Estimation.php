@@ -28,9 +28,9 @@ class Estimation
     private $valeur;
 
     /**
-     * @ORM\OneToOne(targetEntity=Date::class, cascade={"persist", "remove"})
+     * @ORM\Column(type="date")
      */
-    private $idDate;
+    private $date;
 
     /**
      * @ORM\ManyToOne(targetEntity=Lot::class, inversedBy="estimations")
@@ -75,14 +75,14 @@ class Estimation
         return $this;
     }
 
-    public function getIdDate(): ?date
+    public function getDate()
     {
-        return $this->idDate;
+        return $this->date;
     }
 
-    public function setIdDate(?date $idDate): self
+    public function setDate($date): self
     {
-        $this->idDate = $idDate;
+        $this->date = $date;
 
         return $this;
     }

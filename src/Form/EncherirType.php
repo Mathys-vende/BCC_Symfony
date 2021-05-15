@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Encherir;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,7 +16,9 @@ class EncherirType extends AbstractType
             ->add('prixPropose')
             ->add('idAcheteur')
             ->add('idVente')
-            ->add('idDate')
+            ->add('date', DateTimeType::class,[
+                'date_label'=>'Starts On',
+            ])
         ;
     }
 

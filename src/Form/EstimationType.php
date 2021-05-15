@@ -14,7 +14,7 @@ class EstimationType extends AbstractType
         $builder
             ->add('description')
             ->add('valeur')
-            ->add('idDate')
+            ->add('date')
             ->add('idLot')
             ->add('idCommissaire')
         ;

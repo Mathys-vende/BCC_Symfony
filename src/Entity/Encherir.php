@@ -28,9 +28,12 @@ class Encherir
     private $idVente;
 
     /**
-     * @ORM\OneToOne(targetEntity=date::class, cascade={"persist", "remove"})
+     * @ORM\Column(type="datetime")
      */
-    private $idDate;
+    private $date;
+
+
+
     public function __toString() {
         return $this->idVente;
     }
@@ -69,14 +72,14 @@ class Encherir
         return $this;
     }
 
-    public function getIdDate(): ?date
+    public function getDate()
     {
-        return $this->idDate;
+        return $this->date;
     }
 
-    public function setIdDate(?date $idDate): self
+    public function setDate($date): self
     {
-        $this->idDate = $idDate;
+        $this->date = $date;
 
         return $this;
     }
