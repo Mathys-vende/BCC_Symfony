@@ -14,11 +14,6 @@ class EncherirType extends AbstractType
     {
         $builder
             ->add('prixPropose')
-            ->add('idAcheteur')
-            ->add('idVente')
-            ->add('date', DateTimeType::class,[
-                'date_label'=>'Starts On',
-            ])
         ;
     }
 

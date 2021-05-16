@@ -14,9 +14,7 @@ class VenteType extends AbstractType
     {
         $builder
             ->add('commission')
-            ->add('date', DateTimeType::class,[
-                'date_label'=>'Starts On',
-            ])
+
             ->add('idVenteEnchere')
             ->add('idLot')
         ;

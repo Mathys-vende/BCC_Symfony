@@ -21,9 +21,6 @@ class VenteEnchereType extends AbstractType
             ->add('heureDebut')
             ->add('heureFin')
             ->add('type')
-            ->add('Date', DateTimeType::class,[
-                'date_label'=>'Starts On',
-            ])
             ->add('idSalleDeVente')
             ->add('idDevise');
     }

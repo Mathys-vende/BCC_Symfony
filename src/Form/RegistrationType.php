@@ -23,7 +23,6 @@ class RegistrationType extends AbstractType
             ->add('telephone')
             ->add('civilite')
             ->add('email')
-
             ->add('password', RepeatedType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller

@@ -46,8 +46,6 @@ class Personne implements UserInterface
      */
     private $password;
 
-
-
     /**
      * @ORM\Column(type="string", length=255)
      */

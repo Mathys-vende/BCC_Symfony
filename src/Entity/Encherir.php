@@ -32,16 +32,14 @@ class Encherir
      */
     private $date;
 
-
-
-    public function __toString() {
-        return $this->idVente;
-    }
-
     /**
      * @ORM\Column(type="float")
      */
     private $prixPropose;
+
+    public function __toString() {
+        return $this->idVente;
+    }
 
     public function getId(): ?int
     {

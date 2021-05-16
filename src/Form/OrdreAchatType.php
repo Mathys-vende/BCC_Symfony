@@ -14,9 +14,7 @@ class OrdreAchatType extends AbstractType
     {
         $builder
             ->add('offreAcheteur')
-            ->add('date', DateTimeType::class,[
-                'date_label'=>'Starts On',
-            ])
+
             ->add('idVente')
             ->add('idAcheteur')
         ;

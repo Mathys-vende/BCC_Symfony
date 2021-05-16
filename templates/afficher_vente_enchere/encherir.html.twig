@@ -1,0 +1,20 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Vente index{% endblock %}
+
+{% block body %}
+
+    {% if app.user %}
+
+        <h1>Create new Enchere</h1>
+
+        {{ include('encherir/_form.html.twig') }}
+
+        {% else %}
+
+        <p>Connectez vous pour encherir</p>
+            <a href="{{ path('app_login') }}">Connectez vous</a>
+    {% endif %}
+
+{% endblock %}

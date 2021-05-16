@@ -50,7 +50,7 @@ class Vente
     private $encherirs;
 
     public function __toString() {
-        return $this->ordreAchats;
+        return (string)$this->idLot;
     }
 
     public function __construct()

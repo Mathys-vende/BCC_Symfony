@@ -47,4 +47,12 @@ class VenteRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findForIdEnchere($id)
+    {
+        return $this->getEntityManager()->createQuery(
+            'SELECT v
+            FROM App\Entity\Vente v
+            WHERE (v.idVenteEnchere = :id)'
+        )->setParameter('id', $id)->getResult();
+    }
 }
