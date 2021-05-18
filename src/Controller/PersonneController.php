@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Personne;
 use App\Form\PersonneType;
+use App\Form\RegistrationType;
 use App\Repository\PersonneRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @Route("/personne")
@@ -20,8 +22,10 @@ class PersonneController extends AbstractController
      */
     public function index(PersonneRepository $personneRepository): Response
     {
+        $userId = $this->get('security.token_storage')->getToken()->getUser()->getId();
+
         return $this->render('personne/index.html.twig', [
-            'personnes' => $personneRepository->findAll(),
+            'personne'=>$personneRepository->PersonneInfo($userId),
         ]);
     }
 
@@ -61,12 +65,16 @@ class PersonneController extends AbstractController
     /**
      * @Route("/{id}/edit", name="personne_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Personne $personne): Response
+    public function edit(Request $request, Personne $personne, UserPasswordEncoderInterface $passwordEncoder): Response
     {
-        $form = $this->createForm(PersonneType::class, $personne);
+        $form = $this->createForm(RegistrationType::class, $personne);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $personne->setPassword(
+                $passwordEncoder->encodePassword(
+                    $personne,
+                    $form->get('password')->getData()));
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('personne_index');

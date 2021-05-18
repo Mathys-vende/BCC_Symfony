@@ -47,4 +47,16 @@ class ProduitRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function ProduitDesVentes($idLot)
+    {
+        $query = $this->getEntityManager()->createQuery(
+            'SELECT p
+            FROM App\Entity\Produit p
+            WHERE (p.idLot = :id)'
+        )->setParameter('id', $idLot)
+            ->getResult();
+
+        return $query;
+    }
 }

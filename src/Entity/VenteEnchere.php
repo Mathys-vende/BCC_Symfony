@@ -25,24 +25,19 @@ class VenteEnchere
     private $nom;
 
     /**
-     * @ORM\Column(type="date")
-     */
-    private $date;
-
-    /**
      * @ORM\ManyToOne(targetEntity=SalleDeVente::class, inversedBy="venteEncheres")
      */
     private $idSalleDeVente;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="datetime")
      */
-    private $heureDebut;
+    private $dateDebut;
 
     /**
-     * @ORM\Column(type="time", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
      */
-    private $heureFin;
+    private $dateFin;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -85,18 +80,6 @@ class VenteEnchere
         return $this;
     }
 
-    public function getDate()
-    {
-        return $this->date;
-    }
-
-    public function setDate($date): self
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
     public function getIdSalleDeVente(): ?SalleDeVente
     {
         return $this->idSalleDeVente;
@@ -109,26 +92,26 @@ class VenteEnchere
         return $this;
     }
 
-    public function getHeureDebut(): ?\DateTimeInterface
+    public function getDateDebut(): ?\DateTimeInterface
     {
-        return $this->heureDebut;
+        return $this->dateDebut;
     }
 
-    public function setHeureDebut(\DateTimeInterface $heureDebut): self
+    public function setDateDebut(\DateTimeInterface $dateDebut): self
     {
-        $this->heureDebut = $heureDebut;
+        $this->dateDebut = $dateDebut;
 
         return $this;
     }
 
-    public function getHeureFin(): ?\DateTimeInterface
+    public function getDateFin(): ?\DateTimeInterface
     {
-        return $this->heureFin;
+        return $this->dateFin;
     }
 
-    public function setHeureFin(?\DateTimeInterface $heureFin): self
+    public function setDateFin(?\DateTimeInterface $dateFin): self
     {
-        $this->heureFin = $heureFin;
+        $this->dateFin = $dateFin;
 
         return $this;
     }

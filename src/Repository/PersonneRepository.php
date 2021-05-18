@@ -60,5 +60,16 @@ class PersonneRepository extends ServiceEntityRepository implements PasswordUpgr
         ;
     }
     */
+    public function PersonneInfo($iduser)
+    {
+        $query = $this->getEntityManager()->createQuery(
+            'SELECT e 
+            FROM App\Entity\Personne e
+            WHERE (e.id = :id)'
+        )->setParameter('id', $iduser)
+            ->getResult();
+
+        return $query;
+    }
 
 }

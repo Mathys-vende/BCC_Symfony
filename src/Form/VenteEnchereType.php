@@ -18,8 +18,8 @@ class VenteEnchereType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('heureDebut')
-            ->add('heureFin')
+            ->add('dateDebut')
+            ->add('dateFin')
             ->add('type')
             ->add('idSalleDeVente')
             ->add('idDevise');

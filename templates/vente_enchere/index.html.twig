@@ -10,10 +10,9 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nom</th>
-                <th>HeureDebut</th>
-                <th>HeureFin</th>
+                <th>Date de début</th>
+                <th>Date de fin</th>
                 <th>Type</th>
                 <th>actions</th>
             </tr>
@@ -21,10 +20,9 @@
         <tbody>
         {% for vente_enchere in vente_encheres %}
             <tr>
-                <td>{{ vente_enchere.id }}</td>
                 <td>{{ vente_enchere.nom }}</td>
-                <td>{{ vente_enchere.heureDebut ? vente_enchere.heureDebut|date('H:i:s') : '' }}</td>
-                <td>{{ vente_enchere.heureFin ? vente_enchere.heureFin|date('H:i:s') : '' }}</td>
+                <td>{{ vente_enchere.dateDebut ? vente_enchere.dateDebut|date('Y/m/d H:i:s') : '' }}</td>
+                <td>{{ vente_enchere.dateFin ? vente_enchere.dateFin|date('Y/m/d H:i:s') : '' }}</td>
                 <td>{{ vente_enchere.type }}</td>
                 <td>
                     <a href="{{ path('vente_enchere_show', {'id': vente_enchere.id}) }}">show</a>
