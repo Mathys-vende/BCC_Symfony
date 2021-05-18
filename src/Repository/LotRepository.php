@@ -46,5 +46,8 @@ class LotRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+
     */
+
+
 }

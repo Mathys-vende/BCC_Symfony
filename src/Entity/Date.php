@@ -16,14 +16,13 @@ class Date
      * @ORM\Column(type="integer")
      */
     private $id;
-
     /**
      * @ORM\Column(type="date")
      */
     private $date;
 
     public function __toString() {
-        return $this->date;
+        return $this->date->format('Y-m-d');
     }
 
     public function getId(): ?int
@@ -31,12 +30,12 @@ class Date
         return $this->id;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getDate()
     {
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setDate($date): self
     {
         $this->date = $date;
 

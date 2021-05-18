@@ -34,15 +34,9 @@ class Lot
      */
     private $prixDeDepart;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Personne::class, cascade={"persist", "remove"})
-     */
-    private $idVendeur;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Personne::class, cascade={"persist", "remove"})
-     */
-    private $idAcheteur;
+
+
 
     /**
      * @ORM\Column(type="float", nullable=true)
@@ -79,8 +73,18 @@ class Lot
      */
     private $produits;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Personne::class, inversedBy="lots")
+     */
+    private $idVendeur;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Personne::class, inversedBy="idAcheteur")
+     */
+    private $idAcheteur;
+
     public function __toString() {
-        return $this->ventes;
+        return $this->nom;
     }
 
     public function __construct()
@@ -132,29 +136,9 @@ class Lot
         return $this;
     }
 
-    public function getIdVendeur(): ?personne
-    {
-        return $this->idVendeur;
-    }
 
-    public function setIdVendeur(?personne $idVendeur): self
-    {
-        $this->idVendeur = $idVendeur;
 
-        return $this;
-    }
 
-    public function getIdAcheteur(): ?personne
-    {
-        return $this->idAcheteur;
-    }
-
-    public function setIdAcheteur(?personne $idAcheteur): self
-    {
-        $this->idAcheteur = $idAcheteur;
-
-        return $this;
-    }
 
     public function getPrixDeVente(): ?float
     {
@@ -305,6 +289,30 @@ class Lot
                 $produit->setIdLot(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIdVendeur(): ?Personne
+    {
+        return $this->idVendeur;
+    }
+
+    public function setIdVendeur(?Personne $idVendeur): self
+    {
+        $this->idVendeur = $idVendeur;
+
+        return $this;
+    }
+
+    public function getIdAcheteur(): ?Personne
+    {
+        return $this->idAcheteur;
+    }
+
+    public function setIdAcheteur(?Personne $idAcheteur): self
+    {
+        $this->idAcheteur = $idAcheteur;
 
         return $this;
     }

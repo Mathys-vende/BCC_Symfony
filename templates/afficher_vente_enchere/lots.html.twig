@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vente index{% endblock %}
+
+{% block body %}
+    <h1>Vente aux enchères</h1>
+    <h3>{{ id }}</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nom Lot</th>
+            <th>Meilleur Enchere Actuelle</th>
+            <th>Commission</th>
+            <th>actions</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for vente in ventes %}
+            <tr>
+                <td>{{ vente.idLot }}</td>
+                <td>{% for enchere in ListBestEnchere %}
+                        {% if enchere.idVente == vente %}
+                            {% if not (enchere.prixPropose is empty) %}
+                                {{ enchere.prixPropose }}
+                            {% endif %}
+                        {% endif %}
+
+                    {% endfor %}
+                </td>
+                <td>{{ vente.commission }}</td>
+                <td>
+                    <a href="{{ path('afficher_vente_enchere_lots_encherir', {'id': id.id, 'vente' : vente.id}) }}">Encherir</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Pas de lots</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,22 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Vente index{% endblock %}
+
+{% block body %}
+
+    {% if app.user %}
+
+        <h3>La plus haute enchere actuelle :{% for enchere in BestEnchere %}
+                {{ enchere }}
+            {% endfor %}
+        </h3>
+        {{ include('encherir/_form.html.twig') }}
+
+        {% else %}
+
+        <p>Connectez vous pour encherir</p>
+            <a href="{{ path('app_login') }}">Connectez vous</a>
+    {% endif %}
+
+{% endblock %}

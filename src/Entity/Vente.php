@@ -20,9 +20,9 @@ class Vente
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity=Date::class, cascade={"persist", "remove"})
+     * @ORM\Column(type="datetime")
      */
-    private $idDate;
+    private $date;
 
     /**
      * @ORM\ManyToOne(targetEntity=VenteEnchere::class, inversedBy="commission")
@@ -50,7 +50,7 @@ class Vente
     private $encherirs;
 
     public function __toString() {
-        return $this->ordreAchats;
+        return (string)$this->idLot;
     }
 
     public function __construct()
@@ -64,14 +64,14 @@ class Vente
         return $this->id;
     }
 
-    public function getIdDate(): ?date
+    public function getDate()
     {
-        return $this->idDate;
+        return $this->date;
     }
 
-    public function setIdDate(?date $idDate): self
+    public function setDate($date): self
     {
-        $this->idDate = $idDate;
+        $this->date = $date;
 
         return $this;
     }

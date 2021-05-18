@@ -46,5 +46,32 @@ class EncherirRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+
     */
+    public function BestEnchere($idVente)
+    {
+        $query = $this->getEntityManager()->createQuery(
+            'SELECT e 
+            FROM App\Entity\Encherir e
+            WHERE (e.idVente = :id)
+            ORDER BY e.prixPropose DESC'
+        )->setParameter('id', $idVente)->setMaxResults(1)
+            ->getResult();
+
+        return $query;
+    }
+
+    public function EnchereAcheteur($idAcheteur)
+    {
+        $query = $this->getEntityManager()->createQuery(
+            'SELECT e 
+            FROM App\Entity\Encherir e
+            WHERE (e.idAcheteur = :id)
+            GROUP BY e.idVente
+            ORDER BY e.date DESC'
+        )->setParameter('id', $idAcheteur)
+            ->getResult();
+
+        return $query;
+    }
 }

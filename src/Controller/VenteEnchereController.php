@@ -31,6 +31,7 @@ class VenteEnchereController extends AbstractController
     public function new(Request $request): Response
     {
         $venteEnchere = new VenteEnchere();
+        $venteEnchere->setDate(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
         $form = $this->createForm(VenteEnchereType::class, $venteEnchere);
         $form->handleRequest($request);
 

@@ -6,6 +6,7 @@ use App\Repository\PersonneRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -65,6 +66,16 @@ class Personne implements UserInterface
      */
     private $encherirs;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Lot::class, mappedBy="idVendeur")
+     */
+    private $idVendeur;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Lot::class, mappedBy="idAcheteur")
+     */
+    private $idAcheteur;
+
     public function __toString(): ?string
     {
         return $this->email;
@@ -75,6 +86,8 @@ class Personne implements UserInterface
         $this->idAdresse = new ArrayCollection();
         $this->ordreAchats = new ArrayCollection();
         $this->encherirs = new ArrayCollection();
+        $this->idVendeur = new ArrayCollection();
+        $this->idAcheteur = new ArrayCollection();
     }
 
 
@@ -264,5 +277,65 @@ class Personne implements UserInterface
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    /**
+     * @return Collection|Lot[]
+     */
+    public function getLots(): Collection
+    {
+        return $this->idVendeur;
+    }
+
+    public function addLot(Lot $idVendeur): self
+    {
+        if (!$this->idVendeur->contains($idVendeur)) {
+            $this->idVendeur[] = $idVendeur;
+            $idVendeur->setIdVendeur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdVendeur(Lot $idVendeur): self
+    {
+        if ($this->idVendeur->removeElement($idVendeur)) {
+            // set the owning side to null (unless already changed)
+            if ($idVendeur->getIdVendeur() === $this) {
+                $idVendeur->setIdVendeur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Lot[]
+     */
+    public function getIdAcheteur(): Collection
+    {
+        return $this->idAcheteur;
+    }
+
+    public function addIdAcheteur(Lot $idAcheteur): self
+    {
+        if (!$this->idAcheteur->contains($idAcheteur)) {
+            $this->idAcheteur[] = $idAcheteur;
+            $idAcheteur->setIdAcheteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdAcheteur(Lot $idAcheteur): self
+    {
+        if ($this->idAcheteur->removeElement($idAcheteur)) {
+            // set the owning side to null (unless already changed)
+            if ($idAcheteur->getIdAcheteur() === $this) {
+                $idAcheteur->setIdAcheteur(null);
+            }
+        }
+
+        return $this;
     }
 }

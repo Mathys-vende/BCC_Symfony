@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1>Encherir index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>PrixPropose</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for encherir in enchere %}
+            <tr>
+                <td>{{ encherir.prixPropose }}</td>
+                <td>{{ encherir.date }}</td>
+                <td>{{ encherir.idVente }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

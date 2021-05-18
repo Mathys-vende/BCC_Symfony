@@ -31,6 +31,7 @@ class OrdreAchatController extends AbstractController
     public function new(Request $request): Response
     {
         $ordreAchat = new OrdreAchat();
+        $ordreAchat->setDate(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
         $form = $this->createForm(OrdreAchatType::class, $ordreAchat);
         $form->handleRequest($request);
 

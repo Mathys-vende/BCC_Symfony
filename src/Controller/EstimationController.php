@@ -31,6 +31,7 @@ class EstimationController extends AbstractController
     public function new(Request $request): Response
     {
         $estimation = new Estimation();
+        $estimation->setDate(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
         $form = $this->createForm(EstimationType::class, $estimation);
         $form->handleRequest($request);
 

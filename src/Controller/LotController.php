@@ -22,6 +22,7 @@ class LotController extends AbstractController
     {
         return $this->render('lot/index.html.twig', [
             'lots' => $lotRepository->findAll(),
+
         ]);
     }
 

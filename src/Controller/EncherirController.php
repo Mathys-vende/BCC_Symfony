@@ -31,6 +31,7 @@ class EncherirController extends AbstractController
     public function new(Request $request): Response
     {
         $encherir = new Encherir();
+        $encherir->setDate(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
         $form = $this->createForm(EncherirType::class, $encherir);
         $form->handleRequest($request);
 
