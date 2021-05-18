@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1>Enchere auquel vous avez participé</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>PrixPropose</th>
+            <th>Heure</th>
+            <th>Nom du lot</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for encherir in enchere %}
+            <tr>
+                <td>{{ encherir.prixPropose }}</td>
+                <td>{{ encherir.date ? encherir.date|date('H:i:s') : '' }}</td>
+
+                <td>{{ encherir.idVente }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

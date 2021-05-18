@@ -7,14 +7,11 @@
         <div class="navbar-nav">
             <a class="nav-item nav-link active" href="/home">Home</a>
             {% if app.user %}
-                <a class="nav-item nav-link" href="/logout">logout</a>
+                <a class="nav-item nav-link mr-right" href="/logout">logout</a>
                 {%  else %}
                     <a class="nav-item nav-link" href="/login">login</a>
                     <a class="nav-item nav-link" href="/register">register</a>
             {% endif %}
-
-
-
 
         </div>
     </div>

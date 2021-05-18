@@ -7,8 +7,10 @@
 
     {% if app.user %}
 
-        <h1>Create new Enchere</h1>
-
+        <h3>La plus haute enchere actuelle :{% for enchere in BestEnchere %}
+                {{ enchere }}
+            {% endfor %}
+        </h3>
         {{ include('encherir/_form.html.twig') }}
 
         {% else %}

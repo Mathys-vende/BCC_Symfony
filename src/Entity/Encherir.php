@@ -38,7 +38,7 @@ class Encherir
     private $prixPropose;
 
     public function __toString() {
-        return $this->idVente;
+        return (string)$this->prixPropose;
     }
 
     public function getId(): ?int

@@ -15,7 +15,8 @@
                 <th>PrixDeVente</th>
                 <th>PrixDeReserve</th>
                 <th>Statut</th>
-                <th>Categorie</th>
+
+                <th>actions</th>
             </tr>
         </thead>
         <tbody>
@@ -28,9 +29,10 @@
                 <td>{{ lot.prixDeVente }}</td>
                 <td>{{ lot.prixDeReserve }}</td>
                 <td>{{ lot.statut }}</td>
-                {% for c in lot.categories %}
-                    <td>{{ c.nom }}</td>
-                {% endfor %}
+                <td>
+                    <a href="{{ path('lot_show', {'id': lot.id}) }}">show</a>
+                    <a href="{{ path('lot_edit', {'id': lot.id}) }}">edit</a>
+                </td>
             </tr>
         {% else %}
             <tr>
