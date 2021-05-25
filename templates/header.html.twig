@@ -1,19 +1,23 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">Bidcardcoin</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="padding-left: 20px; padding-right: 20px">
+    <a class="navbar-brand" href="/"><i class="fad fa-gavel"></i> BidCardCoin</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="/afficher_vente_enchere">Faire une enchère</a>
-            {% if app.user %}
-                <a class="nav-item nav-link mr-right" href="/personne_info/enchere">Enchères réalisées</a>
-                <a class="nav-item nav-link mr-right" href="/logout">logout</a>
-                {%  else %}
-                    <a class="nav-item nav-link" href="/login">login</a>
-                    <a class="nav-item nav-link" href="/register">register</a>
-            {% endif %}
 
-        </div>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+                <a class="nav-item nav-link" href="/afficher_vente_enchere">Participer à une enchère</a>
+            </li>
+        </ul>
+        <span>
+                            {% if app.user %}
+                                <a type="button" class="btn btn-primary" href="/personne_info/enchere">Mes enchères</a>
+                                <a type="button" class="btn btn-danger" href="/logout">Déconnexion</a>
+                            {% else %}
+                                <a type="button" class="btn btn-light" href="/login">Connexion</a>
+                                <a type="button" class="btn btn-light" href="/register">Inscription</a>
+                            {% endif %}
+        </span>
     </div>
 </nav>

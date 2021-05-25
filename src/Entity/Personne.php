@@ -76,9 +76,9 @@ class Personne implements UserInterface
      */
     private $idAcheteur;
 
-    public function __toString(): ?string
+    public function __toString(): string
     {
-        return $this->email;
+        return (string)$this->email;
     }
 
     public function __construct()

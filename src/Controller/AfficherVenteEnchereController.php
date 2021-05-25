@@ -7,6 +7,7 @@ use App\Entity\Encherir;
 use App\Entity\Vente;
 use App\Entity\VenteEnchere;
 
+use App\Repository\ProduitRepository;
 use App\Form\EncherirType;
 use App\Repository\EncherirRepository;
 use App\Repository\LotRepository;
@@ -58,7 +59,7 @@ class AfficherVenteEnchereController extends AbstractController
     /**
      * @Route("/{id}/lot/{vente}/encherir", name="afficher_vente_enchere_lots_encherir", methods={"GET","POST"})
      */
-    public function encherirLot(Request $request,  Vente $vente, LotRepository $lotRepository, EncherirRepository $encherirRepository): Response
+    public function encherirLot(Request $request,  Vente $vente,ProduitRepository $produitRepository, LotRepository $lotRepository, EncherirRepository $encherirRepository): Response
     {
         $encherir = new Encherir();
         $encherir->setDate(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
@@ -69,6 +70,7 @@ class AfficherVenteEnchereController extends AbstractController
            $bestEnchere = 0;
         }else{
             $bestEnchere = $encherirRepository->BestEnchere($vente->getId())[0];
+            
         }
         $form = $this->createForm(EncherirType::class, $encherir, array('bestEnchere' => $bestEnchere));
         $form->handleRequest($request);
@@ -79,12 +81,13 @@ class AfficherVenteEnchereController extends AbstractController
 
             $entityManager->flush();
 
-            return $this->redirectToRoute('encherir_index');
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('afficher_vente_enchere/encherir.html.twig', [
             'BestEnchere'=>$encherirRepository->BestEnchere($vente->getId()),
             'ventes'=> $lotRepository->find($vente->getIdLot()),
+	    'produits'=> $produitRepository->ProduitDesVentes($vente->getIdLot()),
             'form' => $form->createView(),
         ]);
     }
